@@ -9,21 +9,43 @@ public class Supplement {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    public record Dto(String name, String unit, int amount){}
+
+    @Column(nullable = false)
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "quantity_id")
-    private Quantity quantity;
+    @Column(nullable = false)
+    private String unit;
 
-    public Quantity getQuantity() {
-        return quantity;
-    }
+    @Column(nullable = false)
+    private Integer amount;
 
-    public void setQuantity(Quantity quantity) {
-        this.quantity = quantity;
-    }
 
     public long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 }

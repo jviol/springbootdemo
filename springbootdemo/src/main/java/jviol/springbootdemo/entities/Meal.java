@@ -2,19 +2,33 @@ package jviol.springbootdemo.entities;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "Meal")
 public class Meal {
+
+    public record Dto(Instant feedingTime, String type, int milliliters,
+                      Set<Supplement.Dto> supplements) {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private Instant feedingTime;
-    private String type;
-    private Integer milliLiters;
 
-    private Set<Supplement> supplements;
+    @Column(nullable = false)
+    private String type;
+
+    @Column(nullable = false)
+    private Integer milliliters;
+
+    @OneToMany
+    @JoinColumn(name = "mealId")
+    private Set<Supplement> supplements = new HashSet<>();
 
     public Instant getFeedingTime() {
         return feedingTime;
@@ -32,12 +46,12 @@ public class Meal {
         this.type = type;
     }
 
-    public Integer getMilliLiters() {
-        return milliLiters;
+    public Integer getMilliliters() {
+        return milliliters;
     }
 
-    public void setMilliLiters(Integer milliLiters) {
-        this.milliLiters = milliLiters;
+    public void setMilliliters(Integer milliliters) {
+        this.milliliters = milliliters;
     }
 
     public Long getId() {
@@ -51,4 +65,6 @@ public class Meal {
     public void setSupplements(Set<Supplement> supplements) {
         this.supplements = supplements;
     }
+
+
 }
