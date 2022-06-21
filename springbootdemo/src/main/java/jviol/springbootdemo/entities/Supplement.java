@@ -9,7 +9,7 @@ public class Supplement {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    public record Dto(String name, String unit, int amount){}
+    public record Dto(String name, String unit, int amount) {}
 
     @Column(nullable = false)
     private String name;
@@ -19,6 +19,18 @@ public class Supplement {
 
     @Column(nullable = false)
     private Integer amount;
+
+    @ManyToOne
+    @JoinColumn(name = "meal_id")
+    private Meal meal;
+
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(Meal meal) {
+        this.meal = meal;
+    }
 
 
     public long getId() {

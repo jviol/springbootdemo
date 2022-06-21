@@ -1,9 +1,6 @@
 package jviol.springbootdemo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -12,6 +9,7 @@ public class Baby {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private String name;
     private LocalDate birthdate;
 
@@ -35,4 +33,5 @@ public class Baby {
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
+
 }
